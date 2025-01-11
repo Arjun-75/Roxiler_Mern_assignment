@@ -7,22 +7,19 @@ const TransactionDashboard = () => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 10;
-
+  const itemsPerPage = 3;  // Change to 3 for pagination with 3 items per page
 
   const fetchTransactions = async () => {
     if (!selectedMonth) {
-        console.error("Month is not selected.");
-        return;
+      console.error("Month is not selected.");
+      return;
     }
     console.log("Fetching transactions for month:", selectedMonth);
-
 
     setLoading(true);
     try {
       const response = await fetch(
         `http://localhost:5000/api/transactions?search=${searchQuery}&page=${currentPage}&perPage=${itemsPerPage}&month=${selectedMonth}`
-        
       );
 
       if (!response.ok) {
@@ -39,30 +36,25 @@ const TransactionDashboard = () => {
     }
   };
 
-
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
-    setCurrentPage(1); 
+    setCurrentPage(1);  // Reset to page 1 when search query changes
   };
 
   const handleMonthChange = (e) => {
     setSelectedMonth(e.target.value);
-    setCurrentPage(1); 
+    setCurrentPage(1);  // Reset to page 1 when month changes
   };
 
-  
   useEffect(() => {
     fetchTransactions();
   }, [searchQuery, selectedMonth, currentPage]);
 
   return (
     <div className="bg-blue-50 min-h-screen flex flex-col items-center py-8">
- 
       <h1 className="text-2xl font-bold mb-8 text-center">Transaction Dashboard</h1>
 
-
       <div className="flex space-x-4 mb-6">
-      
         <div className="relative">
           <input
             type="text"
@@ -73,7 +65,6 @@ const TransactionDashboard = () => {
           />
         </div>
 
-        
         <div className="relative">
           <select
             className="appearance-none px-10 py-2 border rounded-full shadow-md focus:outline-none"
@@ -97,7 +88,6 @@ const TransactionDashboard = () => {
         </div>
       </div>
 
-     
       <div className="w-full max-w-5xl bg-yellow-200 rounded-lg overflow-hidden shadow-md">
         <table className="table-auto w-full text-center">
           <thead className="bg-yellow-300">
@@ -141,7 +131,6 @@ const TransactionDashboard = () => {
         </table>
       </div>
 
-     
       <div className="flex justify-between items-center mt-4 w-full max-w-5xl px-4">
         <div>Page {currentPage} of {totalPages}</div>
         <div className="space-x-4">
@@ -168,6 +157,5 @@ const TransactionDashboard = () => {
     </div>
   );
 };
-
 
 export default TransactionDashboard;
