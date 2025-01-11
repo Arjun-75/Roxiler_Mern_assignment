@@ -7,7 +7,7 @@ const TransactionDashboard = () => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 3;  // Change to 3 for pagination with 3 items per page
+  const itemsPerPage = 3;  
 
   const fetchTransactions = async () => {
     if (!selectedMonth) {
@@ -38,12 +38,12 @@ const TransactionDashboard = () => {
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
-    setCurrentPage(1);  // Reset to page 1 when search query changes
+    setCurrentPage(1);  
   };
 
   const handleMonthChange = (e) => {
     setSelectedMonth(e.target.value);
-    setCurrentPage(1);  // Reset to page 1 when month changes
+    setCurrentPage(1);  
   };
 
   useEffect(() => {
