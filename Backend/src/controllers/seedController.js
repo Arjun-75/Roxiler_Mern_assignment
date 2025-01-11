@@ -3,19 +3,19 @@
 const axios = require('axios');
 const Transaction = require('../models/Transaction');
 
-// Third-party API URL
+
 const THIRD_PARTY_URL = "https://s3.amazonaws.com/roxiler.com/product_transaction.json";
 
 const initializeDatabase = async (req, res) => {
     try {
-        // Fetch data from third-party API
+        
         const response = await axios.get(THIRD_PARTY_URL);
         const transactions = response.data;
 
-        // Clear existing data
+        
         await Transaction.deleteMany({});
 
-        // Insert new data into the database
+        
         const formattedTransactions = transactions.map(item => ({
             id: item.id,
             title: item.title,

@@ -9,11 +9,11 @@ const TransactionDashboard = () => {
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 10;
 
-  // Fetch transactions from the backend based on search query
+
   const fetchTransactions = async () => {
     if (!selectedMonth) {
       console.error("Month is not selected.");
-      return; // Prevent the request from being sent if no month is selected
+      return; 
     }
 
     setLoading(true);
@@ -36,30 +36,30 @@ const TransactionDashboard = () => {
     }
   };
 
-  // Handlers
+
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
-    setCurrentPage(1); // Reset to the first page when the search query changes
+    setCurrentPage(1); 
   };
 
   const handleMonthChange = (e) => {
     setSelectedMonth(e.target.value);
-    setCurrentPage(1); // Reset to the first page when changing the month
+    setCurrentPage(1); 
   };
 
-  // Trigger search when the search query or page changes
+  
   useEffect(() => {
     fetchTransactions();
   }, [searchQuery, selectedMonth, currentPage]);
 
   return (
     <div className="bg-blue-50 min-h-screen flex flex-col items-center py-8">
-      {/* Header */}
+ 
       <h1 className="text-2xl font-bold mb-8 text-center">Transaction Dashboard</h1>
 
-      {/* Controls */}
+
       <div className="flex space-x-4 mb-6">
-        {/* Search Input */}
+      
         <div className="relative">
           <input
             type="text"
@@ -70,7 +70,7 @@ const TransactionDashboard = () => {
           />
         </div>
 
-        {/* Select Month Dropdown */}
+        
         <div className="relative">
           <select
             className="appearance-none px-10 py-2 border rounded-full shadow-md focus:outline-none"
@@ -95,7 +95,7 @@ const TransactionDashboard = () => {
         </div>
       </div>
 
-      {/* Table */}
+     
       <div className="w-full max-w-5xl bg-yellow-200 rounded-lg overflow-hidden shadow-md">
         <table className="table-auto w-full text-center">
           <thead className="bg-yellow-300">
@@ -139,7 +139,7 @@ const TransactionDashboard = () => {
         </table>
       </div>
 
-      {/* Pagination */}
+     
       <div className="flex justify-between items-center mt-4 w-full max-w-5xl px-4">
         <div>Page {currentPage} of {totalPages}</div>
         <div className="space-x-4">
