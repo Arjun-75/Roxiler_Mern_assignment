@@ -52,38 +52,42 @@ const BarChartStats = () => {
   const fetchChartData = async (selectedMonth) => {
     setLoading(true);
     setError(null);
-
+  
     try {
       const response = await fetch(
         `http://localhost:5000/api/transactions/barchart?month=${selectedMonth}`
       );
-
+  
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
-
+  
       const data = await response.json();
-
+  
       
+      const frequencies = data.map((item) => item.count);
+  
+      
+  
       setChartData({
-        labels: labels,
+        labels: labels, 
         datasets: [
           {
             label: "Frequency",
-            data: data.frequencies, 
-            backgroundColor: "#5AC9E8", 
+            data: frequencies, 
+            backgroundColor: "#5AC9E8",
             borderColor: "#5AC9E8",
             borderWidth: 1,
           },
         ],
       });
     } catch (error) {
+      console.error("Error fetching chart data:", error);
       setError("Failed to fetch chart data. Please try again later.");
     } finally {
       setLoading(false);
     }
   };
-
   
   useEffect(() => {
     fetchChartData(month);

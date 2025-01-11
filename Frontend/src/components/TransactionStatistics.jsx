@@ -16,7 +16,7 @@ const TransactionStatistics = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/statistics?month=${selectedMonth}`
+        `http://localhost:5000/api/transactions/statistics?month=${selectedMonth}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch data");
