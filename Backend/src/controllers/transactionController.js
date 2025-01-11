@@ -9,31 +9,28 @@ const listTransactions = async (req, res) => {
     try {
         const { search = "", page = 1, perPage = 10, month } = req.query;
 
-        
-        const searchQuery = {
-            $or: [
+        const searchQuery = {};
+        if (search.trim()) {
+            searchQuery.$or = [
                 { title: { $regex: search, $options: "i" } },
                 { description: { $regex: search, $options: "i" } },
                 ...(isNaN(search) ? [] : [{ price: parseFloat(search) }]),
-            ],
-        };
+            ];
+        }
 
         if (month) {
             const moment = require("moment");
-            const monthNumber = moment().month(month).format("M");
-
-            if (!monthNumber) {
+            const monthNumber = moment(month, "MMMM").format("M");
+            if (!monthNumber || isNaN(monthNumber)) {
                 return res.status(400).json({ error: "Invalid month provided." });
             }
 
             searchQuery.$expr = { $eq: [{ $month: "$dateOfSale" }, parseInt(monthNumber, 10)] };
         }
 
-       
         const skip = (parseInt(page) - 1) * parseInt(perPage);
         const limit = parseInt(perPage);
 
-        
         const transactions = await Transaction.find(searchQuery)
             .skip(skip)
             .limit(limit);
@@ -48,8 +45,8 @@ const listTransactions = async (req, res) => {
             transactions,
         });
     } catch (error) {
-        console.error("Error in listTransactions:", error.message);
-        res.status(500).json({ message: "Internal server error", error: error.message });
+        console.error("Error in listTransactions:", error.message, error.stack);
+        res.status(500).json({ message: "Internal server error", details: error.message });
     }
 };
 

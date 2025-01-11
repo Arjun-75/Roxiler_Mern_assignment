@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const TransactionDashboard = () => {
-  const [selectedMonth, setSelectedMonth] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState("March");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [transactions, setTransactions] = useState([]);
@@ -12,14 +12,17 @@ const TransactionDashboard = () => {
 
   const fetchTransactions = async () => {
     if (!selectedMonth) {
-      console.error("Month is not selected.");
-      return; 
+        console.error("Month is not selected.");
+        return;
     }
+    console.log("Fetching transactions for month:", selectedMonth);
+
 
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:5000/api/transactions?month=${selectedMonth}&page=${currentPage}&perPage=${itemsPerPage}&searchQuery=${searchQuery}`
+        `http://localhost:5000/api/transactions?search=${searchQuery}&page=${currentPage}&perPage=${itemsPerPage}&month=${selectedMonth}`
+        
       );
 
       if (!response.ok) {
@@ -77,7 +80,6 @@ const TransactionDashboard = () => {
             value={selectedMonth}
             onChange={handleMonthChange}
           >
-            <option value="March">March</option>
             <option value="January">January</option>
             <option value="February">February</option>
             <option value="March">March</option>
