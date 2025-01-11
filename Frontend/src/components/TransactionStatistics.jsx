@@ -49,7 +49,7 @@ const TransactionStatistics = () => {
         <h1 className="text-2xl font-bold mb-4">
           Statistics - {month}{" "}
           <span className="text-sm text-gray-500">
-            (Selected month name from dropdown)
+            (Statistics details for the selected month)
           </span>
         </h1>
 
