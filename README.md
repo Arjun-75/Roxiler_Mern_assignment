@@ -36,7 +36,8 @@ GET /api/transactions/combined: Consolidated data from all endpoints.
 
 Configured via dotenv for secure environment variable management, with MongoDB credentials sourced from .env.
 
-![image](https://github.com/user-attachments/assets/ea40eb4f-d499-45c5-9c64-1aa25e708ff4)
-![image](https://github.com/user-attachments/assets/aaa6c6c7-785d-44c3-b36c-9cee525c9e65)
-![image](https://github.com/user-attachments/assets/5c700e72-7928-43fb-9ed3-48e006aaf644)
-![image](https://github.com/user-attachments/assets/3b5b27a2-2e85-424f-8116-e9f0e0b963b7)
+![image](https://github.com/user-attachments/assets/56c118c2-3af6-491b-a699-a8b5a1c4a11a)
+![image](https://github.com/user-attachments/assets/a49d7871-006f-4b14-a674-dc1a0f1413d9)
+![image](https://github.com/user-attachments/assets/9abdc683-4a41-46de-a1d4-615ca58c4080)
+![image](https://github.com/user-attachments/assets/208799a6-254f-4952-9ce1-0a18e9dcb643)
+
